@@ -14,5 +14,6 @@ define('MOE_DB_PASS', '***');
 
 define('POMF_FILES_ROOT', '');
 define('POMF_URL', 'https://i.pantsu.cat/');
+define('MOE_URL', 'https://try.pantsu.cat/moe');
 define('ID_CHARSET', 'abcdefghijklmnopqrstuvwxyz');
 
