@@ -213,7 +213,7 @@ function mod ($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $og
                         <td>'.strip_tags($row['originalname']).'</td>
                         <td><a href="'.POMF_URL.$row['filename'].'" target="_BLANK">'.$row['filename'].'</a> ('.$row['originalname'].')</td>
                         <td>'.$row['size'].'</td>
-                        <td><a href="'.MOE_URL'/user/includes/api.php?do=mod&action=remove&fileid='.$row['id'].'&file='.$row['filename'].'" target="_BLANK">Remove</a></td></tr>';
+                        <td><a href="'.MOE_URL.'/user/includes/api.php?do=mod&action=remove&fileid='.$row['id'].'&file='.$row['filename'].'" target="_BLANK">Remove</a></td></tr>';
 
                 }
                 echo '</table></body></html>';
@@ -271,7 +271,7 @@ function mod ($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $og
                     $do = $db->prepare("DELETE FROM files WHERE id = (:id)");
                     $do->bindParam(':id', $fileid);
                     $do->execute();
-                    unlink(.POMF_FILES_ROOT.$file);
+                    unlink(POMF_FILES_ROOT.$file);
                     cfdelete($file);
                     $do = $db->prepare("UPDATE reports SET status = (:status) WHERE fileid = (:fileid)");
                     $do->bindValue(':status', '1');
