@@ -164,7 +164,7 @@ function delete ($filename, $deleteid, $mod) {
             $do = $db->prepare("DELETE FROM files WHERE id = (:id)");
             $do->bindParam(':id', $result['id']);
             $do->execute();
-            unlink('/home/neku/pomf/files/'.$filename);
+            unlink(.POMF_FILES_ROOT.$filename);
             cfdelete($filename);
             echo "<br/>File deleted and hopefully deleted from Cloudflares cache in a moment..<br/>";
         }else{
