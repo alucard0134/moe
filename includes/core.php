@@ -2,7 +2,7 @@
 //error_reporting(E_ERROR | E_WARNING | E_PARSE);
 // This file will handle all functions used by Pomf's Moe Panel
 session_start();
-require_once 'includes/database.inc.php';
+require_once 'database.inc.php';
 
 function register ($email, $pass, $code) {
     global $db;
