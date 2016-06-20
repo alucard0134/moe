@@ -25,7 +25,7 @@
 				<!-- Nav -->
 					<nav id="nav">
 						<a href="#me" class="fa fa-home active"><span>Home</span></a>
-						<a href="ghetto-search.php" class="fa fa-folder"><span>Files</span></a>
+						<a href="search.php" class="fa fa-folder"><span>Files</span></a>
 					</nav>
 
 				<!-- Main -->
