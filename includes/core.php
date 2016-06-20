@@ -4,7 +4,7 @@
 session_start();
 require_once 'database.inc.php';
 
-function register ($email, $pass, $code) {
+function register($email, $pass, $code) {
     global $db;
     $do = $db->prepare("SELECT code, used, level FROM invites WHERE email = (:email)");
     $do->bindParam(':email', $email);
@@ -31,7 +31,7 @@ function register ($email, $pass, $code) {
     }
 }
 
-function generate ($email, $level){
+function generate($email, $level){
     global $db;
     if($_SESSION['level'] === '1'){
         $do = $db->prepare("INSERT INTO invites (email, code, level) VALUES (:email, :code, :level)");
@@ -73,16 +73,16 @@ function generate ($email, $level){
 
 }
 
-function generateRandomString($length = 36) {
+function generateRandomString() {
     $characters = ID_CHARSET;
     $randomString = '';
-    for ($i = 0; $i < $length; $i++) {
+    for ($i = 0; $i < LENGTH; $i++) {
         $randomString .= $characters[rand(0, strlen($characters) - 1)];
     }
     return $randomString;
 }
 
-function login ($email, $pass) {
+function login($email, $pass) {
     global $db;
     $do = $db->prepare("SELECT pass, id, email, level FROM accounts WHERE email = (:email)");
     $do->bindParam(':email', $email);
@@ -99,7 +99,7 @@ function login ($email, $pass) {
     }
 }
 
-function search ($word) {
+function search($word) {
     if(empty($word)) return;
     global $db;
     $str = "%".$word."%";
@@ -128,7 +128,7 @@ function search ($word) {
     }
 }
 
-function cfdelete ($file) {
+function cfdelete($file) {
 
     $butts = array(
             'a' => 'zone_file_purge',
@@ -150,7 +150,7 @@ function cfdelete ($file) {
     curl_close($hue);
 }
 
-function delete ($filename, $deleteid, $mod) {
+function delete($filename, $deleteid, $mod) {
     if(empty($filename)){
         echo "You did something wrong, baka.";
     }else{
@@ -173,7 +173,7 @@ function delete ($filename, $deleteid, $mod) {
     }//hue
 }//penis
 
-function mod ($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $oginalname) {
+function mod($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $oginalname) {
     if($_SESSION['level'] > '0'){
         global $db;
         switch($action){
