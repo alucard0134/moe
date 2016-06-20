@@ -123,7 +123,7 @@ function search ($word) {
         $do->execute();
 
         while ($row = $do->fetch(PDO::FETCH_ASSOC)) {
-            print strip_tags($row['originalname']).' - '.'<a href="'.POMF_URL.$row['filename'].'" target="_BLANK">'.$row['filename'].' </a> '.'<a href="'.MOE_URL'/user/includes/api.php?do=delete&f='.$row['filename'].'" target="_BLANK"> Delete</a><br/>';
+            print strip_tags($row['originalname']).' - '.'<a href="'.POMF_URL.$row['filename'].'" target="_BLANK">'.$row['filename'].' </a> '.'<a href="'.MOE_URL.'/user/includes/api.php?do=delete&f='.$row['filename'].'" target="_BLANK"> Delete</a><br/>';
         }
     }
 }
