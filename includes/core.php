@@ -43,8 +43,8 @@ function generate ($email, $level){
         require_once('Mail.php');
         $from = "Invites <invites@".POMF_URL.">";
         $to = $email;
-        $subject = .POMF_NAME." Account Invite";
-        $body = "This is a automated message from ".POMF_NAME" \n Your invite code is: ".$code."\n Your invite email is: ".$email." \n Access level: ".$level." \n Register at ".MOE_URL."/user/register";
+        $subject = POMF_NAME." Account Invite";
+        $body = "This is a automated message from ".POMF_NAME." \n Your invite code is: ".$code."\n Your invite email is: ".$email." \n Access level: ".$level." \n Register at ".MOE_URL."/user/register";
 
         $host = SMTPD_HOST;
         $username = SMTPD_USERNAME;
