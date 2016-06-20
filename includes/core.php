@@ -111,7 +111,7 @@ function search ($word) {
         $do->execute();
 
         while ($row = $do->fetch(PDO::FETCH_ASSOC)) {
-            print strip_tags($row['originalname']).' - '.'<a href="http://a.pomf.se/'.$row['filename'].'" target="_BLANK">'.$row['filename'].' </a> '.'<a href="http://cayootie.pomf.se/user/includes/api.php?do=delete&f='.$row['filename'].'" target="_BLANK"> Delete</a><br/>';
+            print strip_tags($row['originalname']).' - '.'<a href="'.POMF_URL.$row['filename'].'" target="_BLANK">'.$row['filename'].' </a> '.'<a href="http://cayootie.pomf.se/user/includes/api.php?do=delete&f='.$row['filename'].'" target="_BLANK"> Delete</a><br/>';
         }
 
         //Yes I love not being efficient, deal with it.
@@ -123,7 +123,7 @@ function search ($word) {
         $do->execute();
 
         while ($row = $do->fetch(PDO::FETCH_ASSOC)) {
-            print strip_tags($row['originalname']).' - '.'<a href="http://a.pomf.se/'.$row['filename'].'" target="_BLANK">'.$row['filename'].' </a> '.'<a href="http://cayootie.pomf.se/user/includes/api.php?do=delete&f='.$row['filename'].'" target="_BLANK"> Delete</a><br/>';
+            print strip_tags($row['originalname']).' - '.'<a href="'.POMF_URL.$row['filename'].'" target="_BLANK">'.$row['filename'].' </a> '.'<a href="http://cayootie.pomf.se/user/includes/api.php?do=delete&f='.$row['filename'].'" target="_BLANK"> Delete</a><br/>';
         }
     }
 }
@@ -211,7 +211,7 @@ function mod ($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $og
                     $i++;
                     echo '<tr><td>'.$row['id'].'</td>
                         <td>'.strip_tags($row['originalname']).'</td>
-                        <td><a href="http://a.pomf.se/'.$row['filename'].'" target="_BLANK">'.$row['filename'].'</a> ('.$row['originalname'].')</td>
+                        <td><a href="'.POMF_URL.$row['filename'].'" target="_BLANK">'.$row['filename'].'</a> ('.$row['originalname'].')</td>
                         <td>'.$row['size'].'</td>
                         <td><a href="http://cayootie.pomf.se/user/includes/api.php?do=mod&action=remove&fileid='.$row['id'].'&file='.$row['filename'].'" target="_BLANK">Remove</a></td></tr>';
 
@@ -250,7 +250,7 @@ function mod ($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $og
                     while ($row = $do->fetch(PDO::FETCH_ASSOC)) {
                         $i++;
                         echo '<tr><td>'.$row['id'].'</td>
-                            <td><a href="http://a.pomf.se/'.strip_tags($row['file']).'" target="_BLANK">'.strip_tags($row['file']).'</td>
+                            <td><a href="'.POMF_URL.strip_tags($row['file']).'" target="_BLANK">'.strip_tags($row['file']).'</td>
                             <td>'.$row['fileid'].'</td>
                             <td>'.$row['reporter'].'</td>
                             <td>'.$row['status'].'</td>
