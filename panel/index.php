@@ -5,7 +5,7 @@
 		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 		<meta name="description" content="" />
 		<meta name="keywords" content="" />
-		<link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" />
+		<link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400" rel="stylesheet" />
 		<script src="js/jquery.min.js"></script>
 		<script src="js/config.js"></script>
 		<script src="js/skel.min.js"></script>
@@ -26,7 +26,6 @@
 					<nav id="nav">
 						<a href="#me" class="fa fa-home active"><span>Home</span></a>
 						<a href="ghetto-search.php" class="fa fa-folder"><span>Files</span></a>
-						<a href="http://twitter.com/nekunekus" target="_BLANK" class="fa fa-twitter"><span>Twitter</span></a>
 					</nav>
 
 				<!-- Main -->
