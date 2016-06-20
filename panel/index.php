@@ -50,10 +50,10 @@
 				<!-- Footer -->
 					<div id="footer">
 						<ul class="links">
-							<li><a href="http://pomf.se/">Pomf</a></li>
-							<li><a href="http://p.pomf.se/">Paste</a></li>
-							<li><a href="http://blog.pomf.se">Blog</a></li>
-							<li><a href="http://pomf.se/faq.html">FAQ</a></li>
+							<li><a href="//pantsu.cat/">Pantsu</a></li>
+							<li><a href="//p.pantsu.cat/">Paste</a></li>
+							<li><a href="//blog.pantsu.cat">Blog</a></li>
+							<li><a href="//pantsu.cat/faq.html">FAQ</a></li>
 							<li><a href="../includes/api.php?do=logout">Logout</a></li>
 						</ul>
 					</div>
