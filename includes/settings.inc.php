@@ -13,7 +13,7 @@ define('MOE_DB_PASS', '***');
 
 
 define('POMF_FILES_ROOT', '');
-define(LENGTH, 32);
+define('LENGTH', 32);
 define('POMF_NAME', 'Pantsu.cat');
 define('POMF_ADDRESS', 'pantsu.cat');
 define('POMF_URL', 'https://i.pantsu.cat/');
