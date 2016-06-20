@@ -19,3 +19,6 @@ define('POMF_URL', 'https://i.pantsu.cat/');
 define('MOE_URL', 'https://try.pantsu.cat/moe');
 define('ID_CHARSET', 'abcdefghijklmnopqrstuvwxyz');
 
+define('SMTPD_HOST', '');
+define('SMTPD_USERNAME', '');
+define('SMTPD_PASSWORD', '');
