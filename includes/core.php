@@ -282,4 +282,5 @@ function mod ($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $og
                 }
         }
     }
+}
 ?>
