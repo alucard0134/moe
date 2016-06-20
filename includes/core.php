@@ -41,7 +41,7 @@ function generate ($email, $level){
         $do->bindParam(':level', $level);
         $do->execute();
         require_once('Mail.php');
-        $from = "Invites <invites@".POMF_URL.">";
+        $from = "Invites <invites@".POMF_ADDRESS.">";
         $to = $email;
         $subject = POMF_NAME." Account Invite";
         $body = "This is a automated message from ".POMF_NAME." \n Your invite code is: ".$code."\n Your invite email is: ".$email." \n Access level: ".$level." \n Register at ".MOE_URL."/user/register";
