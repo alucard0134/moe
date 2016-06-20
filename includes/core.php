@@ -2,7 +2,7 @@
 //error_reporting(E_ERROR | E_WARNING | E_PARSE);
 // This file will handle all functions used by Pomf's Moe Panel
 session_start();
-$db = new PDO('mysql:unix_socket=/var/run/mysqld/mysqld.sock;dbname=pomf', 'xxx', 'xxx', array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'UTF8'"));
+require_once 'includes/database.inc.php';
 
 function register ($email, $pass, $code) {
     global $db;
@@ -74,7 +74,7 @@ function generate ($email, $level){
 }
 
 function generateRandomString($length = 36) {
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    $characters = ID_CHARSET;
     $randomString = '';
     for ($i = 0; $i < $length; $i++) {
         $randomString .= $characters[rand(0, strlen($characters) - 1)];
@@ -135,7 +135,7 @@ function cfdelete ($file) {
             'tkn' => 'xxxx',
             'email' => 'xxx',
             'z' => 'pomf.se',
-            'url' => urlencode('http://a.pomf.se/'.$file),
+            'url' => urlencode(POMF_URL.$file),
             );
 
     foreach($butts as $dick=>$cum) { $butts_string .= $dick.'='.$cum.'&'; }
