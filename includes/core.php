@@ -41,10 +41,10 @@ function generate ($email, $level){
         $do->bindParam(':level', $level);
         $do->execute();
         require_once('Mail.php');
-        $from = "Invites <invites@pomf.se>";
+        $from = "Invites <invites@".POMF_URL">";
         $to = $email;
-        $subject = "Pomf.se Account Invite";
-        $body = "This is a automated message from Pomf.se \n Your invite code is: ".$code."\n Your invite email is: ".$email." \n Access level: ".$level." \n Register at http://cayootie.pomf.se/user/register";
+        $subject = .POMF_NAME." Account Invite";
+        $body = "This is a automated message from ".POMF_NAME" \n Your invite code is: ".$code."\n Your invite email is: ".$email." \n Access level: ".$level." \n Register at ".MOE_URL."/user/register";
 
         $host = "xxx";
         $username = "xxx";
@@ -111,7 +111,7 @@ function search ($word) {
         $do->execute();
 
         while ($row = $do->fetch(PDO::FETCH_ASSOC)) {
-            print strip_tags($row['originalname']).' - '.'<a href="'.POMF_URL.$row['filename'].'" target="_BLANK">'.$row['filename'].' </a> '.'<a href="http://cayootie.pomf.se/user/includes/api.php?do=delete&f='.$row['filename'].'" target="_BLANK"> Delete</a><br/>';
+            print strip_tags($row['originalname']).' - '.'<a href="'.POMF_URL.$row['filename'].'" target="_BLANK">'.$row['filename'].' </a> '.'<a href="'.MOE_URL.'/user/includes/api.php?do=delete&f='.$row['filename'].'" target="_BLANK"> Delete</a><br/>';
         }
 
         //Yes I love not being efficient, deal with it.
@@ -123,7 +123,7 @@ function search ($word) {
         $do->execute();
 
         while ($row = $do->fetch(PDO::FETCH_ASSOC)) {
-            print strip_tags($row['originalname']).' - '.'<a href="'.POMF_URL.$row['filename'].'" target="_BLANK">'.$row['filename'].' </a> '.'<a href="http://cayootie.pomf.se/user/includes/api.php?do=delete&f='.$row['filename'].'" target="_BLANK"> Delete</a><br/>';
+            print strip_tags($row['originalname']).' - '.'<a href="'.POMF_URL.$row['filename'].'" target="_BLANK">'.$row['filename'].' </a> '.'<a href="'.MOE_URL'/user/includes/api.php?do=delete&f='.$row['filename'].'" target="_BLANK"> Delete</a><br/>';
         }
     }
 }
@@ -134,7 +134,7 @@ function cfdelete ($file) {
             'a' => 'zone_file_purge',
             'tkn' => 'xxxx',
             'email' => 'xxx',
-            'z' => 'pomf.se',
+            'z' => POMF_URL,
             'url' => urlencode(POMF_URL.$file),
             );
 
@@ -196,8 +196,8 @@ function mod ($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $og
                     table,th,td{border:1px solid black; border-collapse:collapse;}
                 th,td{padding:5px;}
                 </style></head><body>
-                    <p>Keep in mind that this is a alpha version of the mod panel, click <a href="http://cayootie.pomf.se/user/includes/api.php?do=logout">here</a> to logout or <a href="http://cayootie.pomf.se/user/panel" target="_BLANK">here</a> to go to the panel for your personal account.</p>
-                    <form action="http://cayootie.pomf.se/user/includes/api.php" method="get">
+                    <p>Keep in mind that this is a alpha version of the mod panel, click <a href="'.MOE_URL.'/user/includes/api.php?do=logout">here</a> to logout or <a href="'.MOE_URL.'/user/panel" target="_BLANK">here</a> to go to the panel for your personal account.</p>
+                    <form action="'.MOE_URL.'/user/includes/api.php" method="get">
                     <input type="hidden" name="do" value="mod">
                     <input type="hidden" name="action" value="fetch">
                     Date: <input type="text" name="date" value="'.date('Y-m-d').'">
@@ -213,7 +213,7 @@ function mod ($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $og
                         <td>'.strip_tags($row['originalname']).'</td>
                         <td><a href="'.POMF_URL.$row['filename'].'" target="_BLANK">'.$row['filename'].'</a> ('.$row['originalname'].')</td>
                         <td>'.$row['size'].'</td>
-                        <td><a href="http://cayootie.pomf.se/user/includes/api.php?do=mod&action=remove&fileid='.$row['id'].'&file='.$row['filename'].'" target="_BLANK">Remove</a></td></tr>';
+                        <td><a href="'.MOE_URL'/user/includes/api.php?do=mod&action=remove&fileid='.$row['id'].'&file='.$row['filename'].'" target="_BLANK">Remove</a></td></tr>';
 
                 }
                 echo '</table></body></html>';
@@ -254,7 +254,7 @@ function mod ($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $og
                             <td>'.$row['fileid'].'</td>
                             <td>'.$row['reporter'].'</td>
                             <td>'.$row['status'].'</td>
-                            <td><a href="http://cayootie.pomf.se/user/includes/api.php?do=mod&action=remove&fileid='.$row['fileid'].'&file='.$row['file'].'" target="_BLANK">Remove file</a></td></tr>';
+                            <td><a href="'.MOE_URL.'/user/includes/api.php?do=mod&action=remove&fileid='.$row['fileid'].'&file='.$row['file'].'" target="_BLANK">Remove file</a></td></tr>';
 
                     }
                     echo '</table></body></html>';
@@ -271,7 +271,7 @@ function mod ($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $og
                     $do = $db->prepare("DELETE FROM files WHERE id = (:id)");
                     $do->bindParam(':id', $fileid);
                     $do->execute();
-                    unlink('/home/neku/pomf/files/'.$file);
+                    unlink(.POMF_FILES_ROOT.$file);
                     cfdelete($file);
                     $do = $db->prepare("UPDATE reports SET status = (:status) WHERE fileid = (:fileid)");
                     $do->bindValue(':status', '1');
