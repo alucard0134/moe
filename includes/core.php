@@ -10,11 +10,11 @@ function register($email, $pass, $code) {
     $do->bindParam(':email', $email);
     $do->execute();
     $result = $do->fetch();
-    if(!$result['code'] == $code){
+    if (!$result['code'] == $code){
         header('Location: ../register/index.html#fail2');
-    }elseif($result['used'] == '1'){
+    } elseif ($result['used'] == '1'){
         header('Location: ../register/index.html#fail3');
-    }else{
+    } else {
         $do = $db->prepare("INSERT INTO accounts (email, pass, level) VALUES (:email, :pass, :level)");
         $do->bindParam(':email', $email);
         $do->bindParam(':level', $result['level']);
@@ -31,9 +31,9 @@ function register($email, $pass, $code) {
     }
 }
 
-function generate($email, $level){
+function generate($email, $level) {
     global $db;
-    if($_SESSION['level'] === '1'){
+    if ($_SESSION['level'] === '1'){
         $do = $db->prepare("INSERT INTO invites (email, code, level) VALUES (:email, :code, :level)");
         $do->bindParam(':email', $email);
         $code = generateRandomString();
@@ -67,7 +67,7 @@ function generate($email, $level){
             echo("<p>Message successfully sent!</p>");
         }
 
-    }else{
+    } else {
         echo 'What are you doing here? Go away!';
     }
 
@@ -94,17 +94,17 @@ function login($email, $pass) {
         $_SESSION['email'] = $result['email'];
         $_SESSION['level'] = $result['level'];
         header('Location: api.php?do=cp');
-    }else{
+    } else {
         header('Location: ../login/index.html#fail');
     }
 }
 
 function search($word) {
-    if(empty($word)) return;
+    if (empty($word)) return;
     global $db;
     $str = "%".$word."%";
     $id = $_SESSION['id'];
-    if($_SESSION['level'] === '1'){
+    if ($_SESSION['level'] === '1'){
         $do = $db->prepare("SELECT originalname, filename FROM files WHERE originalname LIKE (:1) OR filename LIKE (:2)");
         $do->bindParam(':1', $str);
         $do->bindParam(':2', $str);
@@ -115,7 +115,7 @@ function search($word) {
         }
 
         //Yes I love not being efficient, deal with it.
-    }else{
+    } else {
         $do = $db->prepare("SELECT originalname, filename FROM files WHERE originalname LIKE (:1) AND user = (:3) OR filename LIKE (:2) AND user = (:3)");
         $do->bindParam(':1', $str);
         $do->bindParam(':2', $str);
@@ -151,39 +151,40 @@ function cfdelete($file) {
 }
 
 function delete($filename, $deleteid, $mod) {
-    if(empty($filename)){
+    if (empty($filename)) {
         echo "You did something wrong, baka.";
-    }else{
+    } else {
         global $db;
         $do = $db->prepare("SELECT filename, delid, id, user FROM files WHERE filename = (:filename)");
         $do->bindParam(':filename', $filename);
         $do->execute();
         $result = $do->fetch(PDO::FETCH_ASSOC);
 
-        if($_SESSION['level'] === '1' || $result['user'] === $_SESSION['id']){
+        if ($_SESSION['level'] === '1' || $result['user'] === $_SESSION['id']) {
             $do = $db->prepare("DELETE FROM files WHERE id = (:id)");
             $do->bindParam(':id', $result['id']);
             $do->execute();
             unlink(POMF_FILES_ROOT.$filename);
             cfdelete($filename);
             echo "<br/>File deleted and hopefully deleted from Cloudflares cache in a moment..<br/>";
-        }else{
+        } else {
             echo 'Shame on you';
-        }//hue
-    }//hue
-}//penis
+        }
+    }
+}
 
 function mod($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $oginalname) {
-    if($_SESSION['level'] > '0'){
+    if ($_SESSION['level'] > '0'){
         global $db;
-        switch($action){
+        switch($action) {
 
             case "fetch":
-                if($_SESSION['level'] > '0'){
+                if($_SESSION['level'] > '0') {
                     $do = $db->prepare("SELECT * FROM files WHERE originalname LIKE (:keyword) AND date LIKE (:date) OR filename LIKE (:keyword) AND date LIKE (:date) ORDER BY id DESC LIMIT 0,:amount");
-                }else{
+                } else {
                     $do = $db->prepare("SELECT * FROM files WHERE originalname LIKE (:keyword) AND date LIKE (:date) AND user = (:userid) OR filename LIKE (:keyword) AND date LIKE (:date) AND user = (:userid) ORDER BY id DESC LIMIT 0,:amount");
-                    $do->bindValue(':userid', $_SESSION['id']);}
+                    $do->bindValue(':userid', $_SESSION['id']);
+                }
 
                 $do->bindValue(':date', "%".$date."%");
                 $do->bindValue(':amount', (int) $count, PDO::PARAM_INT);
@@ -233,7 +234,7 @@ function mod($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $ogi
                 break;
 
             case "reports":
-                if($_SESSION['id'] === '1'){
+                if ($_SESSION['id'] === '1') {
                     $do = $db->prepare("SELECT * FROM reports WHERE status = '0'");
                     $do->execute();
 
@@ -259,15 +260,16 @@ function mod($action, $date, $count, $why, $file, $keyword, $fileid, $hash, $ogi
                     }
                     echo '</table></body></html>';
                     echo $i.' Reports in total at being shown.';
-                }else{
+                } else {
                     echo 'You are not allowed to be here, yet.';
                 }
                 break;
 
             case "remove":
-                if($_SESSION['id'] < '0'){
-                    delete($file, $fileid);}
-                if($_SESSION['id'] > '0'){
+                if ($_SESSION['id'] < '0') {
+                    delete($file, $fileid);
+                }
+                if ($_SESSION['id'] > '0') {
                     $do = $db->prepare("DELETE FROM files WHERE id = (:id)");
                     $do->bindParam(':id', $fileid);
                     $do->execute();
