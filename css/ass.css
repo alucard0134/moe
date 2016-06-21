@@ -92,6 +92,7 @@ input[type="submit"] { cursor: pointer; }
 }
 
 #login-form input[type="email"],
+#login-form input[type="text"],
 #login-form input[type="password"] {
 	border: 1px solid #dcdcdc;
 	padding: 12px 10px;
@@ -102,6 +103,7 @@ input[type="submit"] { cursor: pointer; }
 	border-radius: 3px 3px 0 0;
 }
 
+#login-form input[type="text"],
 #login-form input[type="password"] {
 	border-top: none;
 	border-radius: 0px 0px 3px 3px;
