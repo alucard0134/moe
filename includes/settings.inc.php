@@ -23,3 +23,6 @@ define('ID_CHARSET', '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUV
 define('SMTPD_HOST', '');
 define('SMTPD_USERNAME', '');
 define('SMTPD_PASSWORD', '');
+
+define('CF_EMAIL', '');
+define('CF_TOKEN', '');

@@ -130,21 +130,21 @@ function search($word) {
 
 function cfdelete($file) {
 
-    $butts = array(
+    $cloudflare = array(
             'a' => 'zone_file_purge',
-            'tkn' => 'xxxx',
-            'email' => 'xxx',
+            'tkn' => CF_TOKEN,
+            'email' => CF_EMAIL,
             'z' => POMF_URL,
             'url' => urlencode(POMF_URL.$file),
             );
 
-    foreach($butts as $dick=>$cum) { $butts_string .= $dick.'='.$cum.'&'; }
-    rtrim($butts_string, '&');
+    foreach($cloudflare as $dick=>$cum) { $cloudflare_string .= $dick.'='.$cum.'&'; }
+    rtrim($cloudflare_string, '&');
 
     $hue = curl_init();
     curl_setopt($hue,CURLOPT_URL, 'https://www.cloudflare.com/api_json.html');
-    curl_setopt($hue,CURLOPT_POST, count($butts));
-    curl_setopt($hue,CURLOPT_POSTFIELDS, $butts_string);
+    curl_setopt($hue,CURLOPT_POST, count($cloudflare));
+    curl_setopt($hue,CURLOPT_POSTFIELDS, $cloudflare_string);
     curl_setopt($hue,CURLOPT_RETURNTRANSFER, true);
     curl_exec($hue);
     curl_close($hue);
