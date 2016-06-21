@@ -5,16 +5,17 @@ session_start();
 require_once 'database.inc.php';
 
 function register($email, $pass, $code) {
-    global $db;
-    $do = $db->prepare("SELECT code, used, level FROM invites WHERE email = (:email)");
-    $do->bindParam(':email', $email);
-    $do->execute();
-    $result = $do->fetch();
-    if (!$result['code'] == $code) {
-        header('Location: ../register/index.html#fail2');
-    } elseif ($result['used'] == '1') {
-        header('Location: ../register/index.html#fail3');
-    } else {
+	if (empty($code)) {
+		global $db;
+		$do = $db->prepare("SELECT code, used, level FROM invites WHERE email = (:email)");
+		$do->bindParam(':email', $email);
+		$do->execute();
+		$result = $do->fetch();
+		if (!$result['code'] == $code) {
+			header('Location: ../register/index.html#fail2');
+		} elseif ($result['used'] == '1') {
+			header('Location: ../register/index.html#fail3');
+		} else {
         $do = $db->prepare("INSERT INTO accounts (email, pass, level) VALUES (:email, :pass, :level)");
         $do->bindParam(':email', $email);
         $do->bindParam(':level', $result['level']);
@@ -25,10 +26,14 @@ function register($email, $pass, $code) {
         $do->bindValue(':used', '1');
         $do->bindParam(':email', $email);
         $do->execute();
-        $_SESSION['id'] = $result['id'];
-        $_SESSION['email'] = $result['email'];
-        header('Location: api.php?do=cp');
-    }
+		}
+		else {
+			$level = 0;
+			$do = $db->prepare("INSERT INTO accounts (email, pass, level) VALUES (:email, :pass, :level)");
+			$do->bindParam(':email', $email);
+			$do->bindParam(':level', $level);
+		}	
+	}
 }
 
 function generate($email, $level) {
